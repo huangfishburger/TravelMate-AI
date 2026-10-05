@@ -1,0 +1,2973 @@
+[
+  {
+    "id": 1,
+    "category": "basic",
+    "prompt": "Plan a 3-day trip from SAN to SEA from 2026-11-06 to 2026-11-09 for one traveler with a $1000 budget.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "SEA",
+        "departure_date": "2026-11-06",
+        "return_date": "2026-11-09",
+        "requested_days": 3,
+        "travelers": 1,
+        "total_budget_usd": 1000
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "Clarify the mismatch between requested day count and inclusive date range, or explicitly explain arrival/departure-day treatment while preserving fixed dates."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 2,
+    "category": "basic",
+    "prompt": "Plan a 4-day trip from LAX to SFO from 2026-11-12 to 2026-11-15 for two travelers with a total budget of $1800.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "LAX",
+        "destination": "SFO",
+        "departure_date": "2026-11-12",
+        "return_date": "2026-11-15",
+        "requested_days": 4,
+        "travelers": 2,
+        "total_budget_usd": 1800
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 3,
+    "category": "basic",
+    "prompt": "Plan a weekend trip from JFK to BOS from 2026-11-14 to 2026-11-16. I have a $900 total budget.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "JFK",
+        "destination": "BOS",
+        "departure_date": "2026-11-14",
+        "return_date": "2026-11-16",
+        "total_budget_usd": 900
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 4,
+    "category": "basic",
+    "prompt": "Plan a 5-day trip from SFO to HNL from 2026-12-02 to 2026-12-06 for one person. My total budget is $1800.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SFO",
+        "destination": "HNL",
+        "departure_date": "2026-12-02",
+        "return_date": "2026-12-06",
+        "requested_days": 5,
+        "travelers": 1,
+        "total_budget_usd": 1800
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 5,
+    "category": "basic",
+    "prompt": "Plan a 3-day trip from ORD to NYC from 2026-11-20 to 2026-11-22. I want sightseeing, food, and museums.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "ORD",
+        "destination": "NYC",
+        "departure_date": "2026-11-20",
+        "return_date": "2026-11-22",
+        "requested_days": 3
+      },
+      "soft_preferences": [
+        "sightseeing",
+        "food",
+        "museums"
+      ],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 6,
+    "category": "hard_constraint",
+    "prompt": "Plan a 3-day trip from SAN to SEA from 2026-11-06 to 2026-11-08 under $900. I only want nonstop flights.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "SEA",
+        "departure_date": "2026-11-06",
+        "return_date": "2026-11-08",
+        "requested_days": 3,
+        "total_budget_usd": 900,
+        "nonstop_required": true
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 7,
+    "category": "hard_constraint",
+    "prompt": "Plan a trip from LAX to SFO from 2026-11-12 to 2026-11-15. My total budget cannot exceed $700.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "LAX",
+        "destination": "SFO",
+        "departure_date": "2026-11-12",
+        "return_date": "2026-11-15",
+        "total_budget_usd": 700
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 8,
+    "category": "hard_constraint",
+    "prompt": "Plan a 4-day trip from SAN to PDX from 2026-11-10 to 2026-11-13. I must stay at a hotel rated at least 4 stars.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "PDX",
+        "departure_date": "2026-11-10",
+        "return_date": "2026-11-13",
+        "requested_days": 4,
+        "hotel_class_min_stars": 4
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope.",
+        "Verify hotel star class separately from guest review score; clarify if available rating data is ambiguous."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 9,
+    "category": "hard_constraint",
+    "prompt": "Plan a 3-day trip from SFO to LAS from 2026-11-18 to 2026-11-20. I absolutely do not want connecting flights.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SFO",
+        "destination": "LAS",
+        "departure_date": "2026-11-18",
+        "return_date": "2026-11-20",
+        "requested_days": 3,
+        "nonstop_required": true
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 10,
+    "category": "hard_constraint",
+    "prompt": "Plan a 4-day trip from LAX to SEA from 2026-12-01 to 2026-12-04. The hotel must cost no more than $180 per night.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "LAX",
+        "destination": "SEA",
+        "departure_date": "2026-12-01",
+        "return_date": "2026-12-04",
+        "requested_days": 4,
+        "hotel_max_price_per_night_usd": 180
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 11,
+    "category": "soft_preference",
+    "prompt": "Plan a 3-day trip from SAN to SEA from 2026-11-06 to 2026-11-08. I prefer Alaska Airlines, but other airlines are okay.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "SEA",
+        "departure_date": "2026-11-06",
+        "return_date": "2026-11-08",
+        "requested_days": 3
+      },
+      "soft_preferences": [
+        "Alaska Airlines; other airlines acceptable"
+      ],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 12,
+    "category": "soft_preference",
+    "prompt": "Plan a 4-day trip from LAX to SFO from 2026-11-12 to 2026-11-15. I'd prefer a 4-star hotel, but a good 3-star hotel is fine if it saves money.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "LAX",
+        "destination": "SFO",
+        "departure_date": "2026-11-12",
+        "return_date": "2026-11-15",
+        "requested_days": 4
+      },
+      "soft_preferences": [
+        "4-star hotel; good 3-star acceptable for savings"
+      ],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 13,
+    "category": "soft_preference",
+    "prompt": "Plan a 3-day Seattle trip. I would like to stay near downtown if possible, but price is more important.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "Seattle",
+        "requested_days": 3
+      },
+      "soft_preferences": [
+        "near downtown Seattle",
+        "price takes priority over location"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 14,
+    "category": "soft_preference",
+    "prompt": "Plan a trip from SAN to NYC from 2026-12-03 to 2026-12-08. I prefer morning flights but I'm flexible.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "NYC",
+        "departure_date": "2026-12-03",
+        "return_date": "2026-12-08"
+      },
+      "soft_preferences": [
+        "morning flights; flexible"
+      ],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 15,
+    "category": "soft_preference",
+    "prompt": "Plan a 4-day trip to Portland. I like boutique hotels, coffee shops, bookstores, and local restaurants, but keep the trip reasonably affordable.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "Portland",
+        "requested_days": 4
+      },
+      "soft_preferences": [
+        "boutique hotels",
+        "coffee shops",
+        "bookstores",
+        "local restaurants",
+        "reasonable affordability without inventing a total budget"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 16,
+    "category": "mixed_constraints",
+    "prompt": "Plan a 3-day trip from SAN to SEA from 2026-11-06 to 2026-11-08. My budget is $1000. Flights must be nonstop, and I prefer Alaska Airlines.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "SEA",
+        "departure_date": "2026-11-06",
+        "return_date": "2026-11-08",
+        "requested_days": 3,
+        "total_budget_usd": 1000,
+        "nonstop_required": true
+      },
+      "soft_preferences": [
+        "Alaska Airlines"
+      ],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 17,
+    "category": "mixed_constraints",
+    "prompt": "Plan a 4-day trip from LAX to SFO with a maximum budget of $1200. I must have a hotel rated at least 4 stars and would prefer to stay near Union Square.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "LAX",
+        "destination": "SFO",
+        "requested_days": 4,
+        "total_budget_usd": 1200,
+        "hotel_class_min_stars": 4
+      },
+      "soft_preferences": [
+        "near Union Square"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope.",
+        "Verify hotel star class separately from guest review score; clarify if available rating data is ambiguous."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 18,
+    "category": "mixed_constraints",
+    "prompt": "Plan a trip from SFO to SEA from 2026-11-20 to 2026-11-24. I must fly nonstop. I prefer Delta, but choose another airline if it provides a significantly better option.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SFO",
+        "destination": "SEA",
+        "departure_date": "2026-11-20",
+        "return_date": "2026-11-24",
+        "nonstop_required": true
+      },
+      "soft_preferences": [
+        "Delta; another airline acceptable for significantly better value"
+      ],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 19,
+    "category": "mixed_constraints",
+    "prompt": "Plan a 5-day trip from SAN to BOS with a $1500 budget. I must stay under budget, but I would prefer a hotel rated 4 stars or higher.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "BOS",
+        "requested_days": 5,
+        "total_budget_usd": 1500
+      },
+      "soft_preferences": [
+        "hotel class at least 4 stars preferred, not mandatory"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 20,
+    "category": "mixed_constraints",
+    "prompt": "Plan a 4-day trip from LAX to NYC. My budget is $1600. I only want nonstop flights and would like to stay in Manhattan if possible.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "LAX",
+        "destination": "NYC",
+        "requested_days": 4,
+        "total_budget_usd": 1600,
+        "nonstop_required": true
+      },
+      "soft_preferences": [
+        "Manhattan accommodation if possible"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 21,
+    "category": "budget_pressure",
+    "prompt": "Plan a 4-day trip from SAN to SEA from 2026-11-06 to 2026-11-09 with only $500.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "SEA",
+        "departure_date": "2026-11-06",
+        "return_date": "2026-11-09",
+        "requested_days": 4,
+        "total_budget_usd": 500
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 22,
+    "category": "budget_pressure",
+    "prompt": "Plan a 5-day trip from LAX to NYC from 2026-12-01 to 2026-12-05 with a total budget of $800.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "LAX",
+        "destination": "NYC",
+        "departure_date": "2026-12-01",
+        "return_date": "2026-12-05",
+        "requested_days": 5,
+        "total_budget_usd": 800
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 23,
+    "category": "budget_pressure",
+    "prompt": "Plan a 4-day trip from SFO to HNL from 2026-12-08 to 2026-12-11. My maximum total budget is $700.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SFO",
+        "destination": "HNL",
+        "departure_date": "2026-12-08",
+        "return_date": "2026-12-11",
+        "requested_days": 4,
+        "total_budget_usd": 700
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 24,
+    "category": "budget_pressure",
+    "prompt": "Plan a 7-day trip from SAN to NYC from 2026-12-01 to 2026-12-07. I only have $900 total.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "NYC",
+        "departure_date": "2026-12-01",
+        "return_date": "2026-12-07",
+        "requested_days": 7,
+        "total_budget_usd": 900
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 25,
+    "category": "budget_pressure",
+    "prompt": "Plan a 3-day trip from LAX to LAS for two people with a total budget of $450.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "LAX",
+        "destination": "LAS",
+        "requested_days": 3,
+        "travelers": 2,
+        "total_budget_usd": 450
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 26,
+    "category": "preference_quality",
+    "prompt": "Plan a 4-day Seattle trip for someone who loves coffee, bookstores, local food, and quiet neighborhoods. Avoid making the itinerary too touristy.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "Seattle",
+        "requested_days": 4
+      },
+      "soft_preferences": [
+        "coffee",
+        "bookstores",
+        "local food",
+        "quiet neighborhoods",
+        "avoid overly touristy itinerary"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 27,
+    "category": "preference_quality",
+    "prompt": "Plan a 3-day San Francisco trip focused on photography, architecture, and scenic views.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "San Francisco",
+        "requested_days": 3
+      },
+      "soft_preferences": [
+        "photography",
+        "architecture",
+        "scenic views"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 28,
+    "category": "preference_quality",
+    "prompt": "Plan a 4-day NYC trip for someone interested in art museums, independent bookstores, and Japanese food.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "NYC",
+        "requested_days": 4
+      },
+      "soft_preferences": [
+        "art museums",
+        "independent bookstores",
+        "Japanese food"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 29,
+    "category": "preference_quality",
+    "prompt": "Plan a 3-day Portland trip focused on coffee, nature, local restaurants, and vintage shopping.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "Portland",
+        "requested_days": 3
+      },
+      "soft_preferences": [
+        "coffee",
+        "nature",
+        "local restaurants",
+        "vintage shopping"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 30,
+    "category": "preference_quality",
+    "prompt": "Plan a 5-day Los Angeles trip for someone interested in beaches, Korean food, art, and shopping.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "Los Angeles",
+        "requested_days": 5
+      },
+      "soft_preferences": [
+        "beaches",
+        "Korean food",
+        "art",
+        "shopping"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 31,
+    "category": "pace",
+    "prompt": "Plan a relaxing 4-day trip to Seattle. I don't like packed schedules and would prefer only two or three major activities per day.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "Seattle",
+        "requested_days": 4
+      },
+      "soft_preferences": [
+        "relaxed pace",
+        "2-3 major activities per day"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 32,
+    "category": "pace",
+    "prompt": "Plan an energetic 3-day trip to New York. I want to see as much as reasonably possible.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "New York",
+        "requested_days": 3
+      },
+      "soft_preferences": [
+        "energetic pace",
+        "many sights while remaining realistic"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 33,
+    "category": "pace",
+    "prompt": "Plan a 5-day San Francisco trip for my parents. Keep walking and daily travel to a reasonable level and avoid overly packed days.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "San Francisco",
+        "requested_days": 5
+      },
+      "soft_preferences": [
+        "reasonable walking and travel for parents",
+        "avoid packed days"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 34,
+    "category": "pace",
+    "prompt": "Plan a slow-paced 4-day Portland trip with plenty of time for cafes and exploring neighborhoods.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "Portland",
+        "requested_days": 4
+      },
+      "soft_preferences": [
+        "slow pace",
+        "time for cafes and neighborhood exploration"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 35,
+    "category": "pace",
+    "prompt": "Plan a 3-day Las Vegas trip. I prefer late mornings and don't want anything scheduled before 10 AM.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "Las Vegas",
+        "requested_days": 3,
+        "earliest_scheduled_activity": "10:00"
+      },
+      "soft_preferences": [
+        "late mornings"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 36,
+    "category": "geographic_efficiency",
+    "prompt": "Plan a 4-day Seattle trip. Group nearby attractions together so I don't spend too much time traveling across the city.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "Seattle",
+        "requested_days": 4
+      },
+      "soft_preferences": [
+        "group nearby Seattle attractions",
+        "minimize cross-city travel"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 37,
+    "category": "geographic_efficiency",
+    "prompt": "Plan a 4-day San Francisco itinerary and minimize unnecessary travel between neighborhoods.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "San Francisco",
+        "requested_days": 4
+      },
+      "soft_preferences": [
+        "minimize unnecessary travel between San Francisco neighborhoods"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 38,
+    "category": "geographic_efficiency",
+    "prompt": "Plan a 5-day NYC itinerary. Try to organize each day around one or two nearby neighborhoods.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "NYC",
+        "requested_days": 5
+      },
+      "soft_preferences": [
+        "group each NYC day around 1-2 nearby neighborhoods"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 39,
+    "category": "geographic_efficiency",
+    "prompt": "Plan a 3-day Los Angeles trip. I know LA is spread out, so minimize driving time as much as possible.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "Los Angeles",
+        "requested_days": 3
+      },
+      "soft_preferences": [
+        "minimize driving time in Los Angeles"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 40,
+    "category": "geographic_efficiency",
+    "prompt": "Plan a 4-day Chicago trip and group attractions geographically whenever possible.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification"
+      ],
+      "hard_constraints": {
+        "destination": "Chicago",
+        "requested_days": 4
+      },
+      "soft_preferences": [
+        "group Chicago attractions geographically"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 41,
+    "category": "conflicting_preferences",
+    "prompt": "Plan a 4-day trip from SAN to SEA with a $700 budget. I prefer luxury hotels, but staying within budget is mandatory.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "SEA",
+        "requested_days": 4,
+        "total_budget_usd": 700
+      },
+      "soft_preferences": [
+        "luxury hotels; budget takes priority"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 42,
+    "category": "conflicting_preferences",
+    "prompt": "Plan a trip from LAX to NYC with a $1000 budget. I prefer business class, but the total budget is more important.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "LAX",
+        "destination": "NYC",
+        "total_budget_usd": 1000
+      },
+      "soft_preferences": [
+        "business class; budget takes priority"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "Ask for trip duration before planning the itinerary.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 43,
+    "category": "conflicting_preferences",
+    "prompt": "Plan a 5-day San Francisco trip with a maximum budget of $900. I'd love an upscale hotel downtown, but I'm willing to compromise on the hotel.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "destination": "San Francisco",
+        "requested_days": 5,
+        "total_budget_usd": 900
+      },
+      "soft_preferences": [
+        "upscale downtown hotel; compromise permitted"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 44,
+    "category": "conflicting_preferences",
+    "prompt": "Plan a 4-day Seattle trip under $800. I prefer expensive fine-dining restaurants, but do not exceed the total trip budget.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "destination": "Seattle",
+        "requested_days": 4,
+        "total_budget_usd": 800
+      },
+      "soft_preferences": [
+        "fine dining; budget takes priority"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 45,
+    "category": "conflicting_preferences",
+    "prompt": "Plan a 3-day trip from SAN to SEA. I prefer Alaska Airlines and a luxury hotel, but my $600 total budget is a hard limit.",
+    "expected": {
+      "allowed_response_types": [
+        "itinerary",
+        "constraint_or_search_failure_explanation",
+        "clarification",
+        "budget_shortfall_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "SEA",
+        "requested_days": 3,
+        "total_budget_usd": 600
+      },
+      "soft_preferences": [
+        "Alaska Airlines",
+        "luxury hotel; budget takes priority"
+      ],
+      "clarification_behavior": [
+        "Ask for dates before date-dependent flight or hotel searches; an undated itinerary with clearly stated assumptions is acceptable.",
+        "State a traveler-count assumption or ask; keep all prices and budget calculations consistent with that scope."
+      ],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights",
+          "search_hotels",
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [],
+        "check_budget_required_for_final_itinerary": true,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": true,
+        "do_not_invent_total_budget": false,
+        "on_over_budget": "replan_then_recheck_or_explain_at_limit",
+        "max_budget_replans_per_planner_run": 2,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": true,
+        "replan_if_overall_score_below": 7,
+        "max_quality_replans": 2,
+        "return_latest_after_limit": true,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": true
+      },
+      "output_behavior": {
+        "full_itinerary_required": "only_when_returning_itinerary",
+        "itinerary_sections_in_order": [
+          "Daily Summary",
+          "Daily Details",
+          "Budget"
+        ],
+        "must_not_expand_simple_query_to_full_itinerary": false
+      }
+    }
+  },
+  {
+    "id": 46,
+    "category": "simple_query",
+    "prompt": "Find me nonstop flights from SAN to SEA on 2026-11-06. I don't need a full itinerary.",
+    "expected": {
+      "allowed_response_types": [
+        "search_results",
+        "search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "SAN",
+        "destination": "SEA",
+        "departure_date": "2026-11-06",
+        "nonstop_required": true
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": false,
+        "replan_if_overall_score_below": null,
+        "max_quality_replans": 0,
+        "return_latest_after_limit": false,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": false
+      },
+      "output_behavior": {
+        "full_itinerary_required": false,
+        "itinerary_sections_in_order": [],
+        "must_not_expand_simple_query_to_full_itinerary": true
+      }
+    }
+  },
+  {
+    "id": 47,
+    "category": "simple_query",
+    "prompt": "Find hotels in downtown Seattle from 2026-11-06 to 2026-11-09 for one traveler. Keep them under $200 per night.",
+    "expected": {
+      "allowed_response_types": [
+        "search_results",
+        "search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "destination": "Seattle",
+        "check_in_date": "2026-11-06",
+        "check_out_date": "2026-11-09",
+        "travelers": 1,
+        "hotel_price_per_night_usd": {
+          "value": 200,
+          "operator": "<"
+        },
+        "hotel_location": "downtown Seattle"
+      },
+      "soft_preferences": [],
+      "clarification_behavior": [],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_hotels"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": false,
+        "replan_if_overall_score_below": null,
+        "max_quality_replans": 0,
+        "return_latest_after_limit": false,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": false
+      },
+      "output_behavior": {
+        "full_itinerary_required": false,
+        "itinerary_sections_in_order": [],
+        "must_not_expand_simple_query_to_full_itinerary": true
+      }
+    }
+  },
+  {
+    "id": 48,
+    "category": "simple_query",
+    "prompt": "Find some highly rated coffee shops near Pike Place Market in Seattle. Don't plan the rest of my trip.",
+    "expected": {
+      "allowed_response_types": [
+        "search_results",
+        "search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "destination": "Seattle",
+        "search_area": "near Pike Place Market, Seattle"
+      },
+      "soft_preferences": [
+        "highly rated coffee shops"
+      ],
+      "clarification_behavior": [],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": false,
+        "replan_if_overall_score_below": null,
+        "max_quality_replans": 0,
+        "return_latest_after_limit": false,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": false
+      },
+      "output_behavior": {
+        "full_itinerary_required": false,
+        "itinerary_sections_in_order": [],
+        "must_not_expand_simple_query_to_full_itinerary": true
+      }
+    }
+  },
+  {
+    "id": 49,
+    "category": "simple_query",
+    "prompt": "Find flight options from LAX to SFO on 2026-11-12. I prefer morning departures and want the cheapest reasonable options.",
+    "expected": {
+      "allowed_response_types": [
+        "search_results",
+        "search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "origin": "LAX",
+        "destination": "SFO",
+        "departure_date": "2026-11-12"
+      },
+      "soft_preferences": [
+        "morning departures",
+        "cheapest reasonable options"
+      ],
+      "clarification_behavior": [],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_flights"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": false,
+        "replan_if_overall_score_below": null,
+        "max_quality_replans": 0,
+        "return_latest_after_limit": false,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": false
+      },
+      "output_behavior": {
+        "full_itinerary_required": false,
+        "itinerary_sections_in_order": [],
+        "must_not_expand_simple_query_to_full_itinerary": true
+      }
+    }
+  },
+  {
+    "id": 50,
+    "category": "simple_query",
+    "prompt": "Find interesting bookstores and cafes in Portland for someone who likes quiet places. I only want recommendations, not a full itinerary.",
+    "expected": {
+      "allowed_response_types": [
+        "search_results",
+        "search_failure_explanation"
+      ],
+      "hard_constraints": {
+        "destination": "Portland"
+      },
+      "soft_preferences": [
+        "bookstores",
+        "cafes",
+        "quiet places"
+      ],
+      "clarification_behavior": [],
+      "tool_behavior": {
+        "tools_when_applicable": [
+          "search_places"
+        ],
+        "require_available_inputs": true,
+        "forbidden_tools": [
+          "check_budget"
+        ],
+        "check_budget_required_for_final_itinerary": false,
+        "use_verified_prices_when_available": true,
+        "label_unverified_estimates": true
+      },
+      "budget_behavior": {
+        "user_supplied_total": false,
+        "do_not_invent_total_budget": true,
+        "on_over_budget": "not_applicable",
+        "max_budget_replans_per_planner_run": 0,
+        "never_present_unapproved_hard_constraint_violation_as_success": true
+      },
+      "quality_behavior": {
+        "evaluate_if_itinerary": false,
+        "replan_if_overall_score_below": null,
+        "max_quality_replans": 0,
+        "return_latest_after_limit": false,
+        "score_threshold_is_quality_target_not_unconditional_pass_rule": false
+      },
+      "output_behavior": {
+        "full_itinerary_required": false,
+        "itinerary_sections_in_order": [],
+        "must_not_expand_simple_query_to_full_itinerary": true
+      }
+    }
+  }
+]
