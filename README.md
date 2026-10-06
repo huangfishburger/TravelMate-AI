@@ -5,32 +5,21 @@ A conversational travel planner built in Python. Users can plan trips through a 
 ## Architecture
 
 ```mermaid
-flowchart LR
-    U[User] --> W[Web UI<br/>web/ + web_app.py]
-    U --> C[CLI<br/>main.py]
-    W --> A[run_agent<br/>agent.py]
-    C --> A
-
-    A --> I[Intent and ambiguity detection<br/>intent.py]
-    I --> M[Trip state and five recent turns<br/>memory.py]
-    M --> S[Summary of older turns]
-    A --> U[Shared helpers<br/>utils/]
-    A --> P[Planner<br/>OpenAI Responses API]
-    P --> T[Tool registry and execution<br/>tools/registry.py]
-    T --> F[Flight, hotel, and place search<br/>SerpApi]
-    T --> B[Budget calculation<br/>check_budget]
-    B -->|Over budget: up to two replans| P
-    P --> E[Itinerary quality scoring<br/>evaluator.py]
-    E -->|Below 7: up to two replans| P
-    E --> A
-    A --> W
-    A --> C
-
-    R[50-case batch runner<br/>tests/run_cases.py] --> A
-    R --> V[Independent test reviewer<br/>tests/reviewer.py]
+flowchart TD
+    U[User request<br/>web or CLI] --> I[Understand intent and constraints]
+    I --> M[Update trip state and conversation memory]
+    M --> P[Plan the trip]
+    P --> S[Search real flights, hotels, and places<br/>when needed]
+    S --> V[Validate costs against the budget<br/>when one is supplied]
+    V --> E[Evaluate itinerary quality<br/>when a full plan is produced]
+    V -->|Over budget: retry up to 2 times| P
+    E -->|Score below 7: retry up to 2 times| P
+    E --> F[Final answer]
 ```
 
-For each user turn, `intent.py` identifies the request and explicit changes to trip requirements. It asks for clarification only when supplied requirements materially conflict. `agent.py` manages tool calls, budget replanning, and quality replanning. The production `evaluator.py` scores itinerary realism, geographic efficiency, preference alignment, and overall quality. `tools/` contains external searches and the budget check. Shared helpers now live in `utils/`: `utils/currency.py` for currency defaults, `utils/multimodal.py` for image input, `utils/token_usage.py` for token accounting, plus budget, error, and tool-output helpers. `tests/reviewer.py` is an **independent, test-only reviewer**; it does not participate in user-facing planning.
+The diagram shows a full itinerary request. `intent.py` identifies the request and explicit changes to trip requirements; `memory.py` preserves trip state and summarizes older turns. If supplied requirements materially conflict, the agent asks for clarification before planning. `agent.py` runs the planner and any replans, `tools/` supplies search results and budget calculations, and `evaluator.py` scores itinerary quality. Narrow questions can skip searches, budget checks, or evaluation when they do not apply. After the retry limit, the agent explains an unresolved budget shortfall or returns the latest quality revision.
+
+Shared helpers live in `utils/`: `utils/currency.py` for currency defaults, `utils/multimodal.py` for image input, `utils/token_usage.py` for token accounting, plus budget, error, and tool-output helpers. The 50-case test runner and independent reviewer live in `tests/`; they assess the project and are not part of the user-facing request flow.
 
 ## Setup and run
 
