@@ -15,7 +15,7 @@ from utils.token_usage import token_totals
 
 def fingerprint(case, config):
     source = "".join((ROOT / p).read_text(encoding="utf-8") for p in
-                     ["agent.py", "evaluator.py", "intent.py", "memory.py", "utils/currency.py", "utils/token_usage.py", "utils/multimodal.py", "instructions.py", "utils/tool_output.py", "tests/case_checks.py", "tests/reviewer.py", "tests/run_cases.py"])
+                     ["agent.py", "evaluator.py", "intent.py", "memory.py", "utils/currency.py", "utils/token_usage.py", "utils/multimodal.py", "instructions.py", "utils/tool_output.py", "tools/evaluation.py", "tests/case_checks.py", "tests/reviewer.py", "tests/run_cases.py"])
     return hashlib.sha256((json.dumps({"case": case, "config": config}, sort_keys=True)
                            + source).encode()).hexdigest()
 
