@@ -1,7 +1,8 @@
-"""Independent, tool-free review of a proposed itinerary."""
+"""Independent itinerary evaluator with read-only verification tools."""
 import json
 
 from instructions import EVALUATOR_INSTRUCTIONS
+from tools.evaluation import audit_budget, inspect_booking_evidence
 from utils.multimodal import has_images
 from utils.token_usage import usage_dict
 
@@ -55,6 +56,16 @@ EVALUATION_SCHEMA = {
     "additionalProperties": False,
 }
 
+EVALUATOR_TOOLS = [{
+    "type": "function", "name": "audit_budget", "strict": True,
+    "description": "Independently recalculate the candidate's structured budget and compare it with the planner's budget-check inputs. No arguments are needed.",
+    "parameters": {"type": "object", "properties": {}, "required": [], "additionalProperties": False},
+}, {
+    "type": "function", "name": "inspect_booking_evidence", "strict": True,
+    "description": "Inspect concise flight times, paired returns, and hotel full-stay prices from the planner's search results. No arguments are needed.",
+    "parameters": {"type": "object", "properties": {}, "required": [], "additionalProperties": False},
+}]
+
 
 def evaluate_itinerary(client, conversation, answer, trace=None, memory_context=None):
     # Send user requirements, rather than planner tool calls or internal feedback.
@@ -71,16 +82,44 @@ def evaluate_itinerary(client, conversation, answer, trace=None, memory_context=
             "Evaluate this proposed answer against the preceding requirements and reference images:\n"
             + json.dumps({"candidate": answer, "tool_evidence": tool_evidence(trace),
                           "trip_memory": memory_context}, ensure_ascii=False))}]
-    response = client.responses.create(
-        model="gpt-5.4-mini",
-        instructions=EVALUATOR_INSTRUCTIONS,
-        input=evaluation_input,
-        text={"format": {"type": "json_schema", "name": "itinerary_evaluation",
-                         "strict": True, "schema": EVALUATION_SCHEMA}},
-    )
-    if trace is not None:
-        trace.append({"event": "model_call", "phase": "evaluator",
-                      "usage": usage_dict(response)})
+    current_input = evaluation_input
+    for round_index in range(3):
+        response = client.responses.create(
+            model="gpt-5.4-mini",
+            instructions=EVALUATOR_INSTRUCTIONS,
+            input=current_input,
+            tools=EVALUATOR_TOOLS,
+            text={"format": {"type": "json_schema", "name": "itinerary_evaluation",
+                             "strict": True, "schema": EVALUATION_SCHEMA}},
+        )
+        if trace is not None:
+            trace.append({"event": "model_call", "phase": "evaluator",
+                          "usage": usage_dict(response)})
+        output_items = getattr(response, "output", None)
+        calls = [item for item in output_items if getattr(item, "type", None) == "function_call"] if isinstance(output_items, list) else []
+        if not calls:
+            break
+        if round_index == 2:
+            raise RuntimeError("Evaluator reached its tool calling limit")
+        if isinstance(current_input, str):
+            current_input = [{"role": "user", "content": current_input}]
+        current_input.extend(output_items)
+        for call in calls:
+            if trace is not None:
+                trace.append({"event": "evaluator_tool_start", "name": call.name})
+            if call.name == "audit_budget":
+                result = audit_budget(answer, trace)
+            elif call.name == "inspect_booking_evidence":
+                result = inspect_booking_evidence(trace)
+            else:
+                raise ValueError(f"Unknown evaluator tool: {call.name}")
+            if trace is not None:
+                trace.append({"event": "evaluator_tool_call", "name": call.name,
+                              "result": result})
+            current_input.append({"type": "function_call_output", "call_id": call.call_id,
+                                  "output": json.dumps(result, ensure_ascii=False)})
+    else:
+        raise RuntimeError("Evaluator did not produce a final evaluation")
     evaluation = json.loads(response.output_text)
     if not evaluation.pop("is_itinerary"):
         return None
