@@ -24,8 +24,6 @@ OPENAI_API_KEY=your_openai_api_key
 SERPAPI_API_KEY=your_serpapi_api_key
 ```
 
-`.env` is listed in `.gitignore`. Keep credentials out of source files and commits.
-
 Start the web interface:
 
 ```powershell
