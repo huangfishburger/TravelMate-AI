@@ -11,8 +11,8 @@ from uuid import uuid4
 
 from agent import preferred_response_language, run_agent
 from memory import new_memory
-from multimodal import image_part
-from token_usage import token_totals
+from utils.multimodal import image_part
+from utils.token_usage import token_totals
 
 
 ROOT = Path(__file__).resolve().parent
