@@ -2,7 +2,8 @@
 import json
 
 from instructions import EVALUATOR_INSTRUCTIONS
-from multimodal import has_images
+from utils.multimodal import has_images
+from utils.token_usage import usage_dict
 
 SCORE_NAMES = (
     "itinerary_realism", "geographic_efficiency",
@@ -15,7 +16,7 @@ EVIDENCE_FIELDS = {
     "independent_return_options",
     "arrival_airport", "time", "id", "price", "currency", "layovers",
     "duration", "total_duration", "properties", "name", "hotel_class",
-    "rate_per_night", "total_rate", "lowest", "extracted_lowest",
+    "rate_per_night", "total_rate", "stay_nights", "full_stay_price", "lowest", "extracted_lowest",
     "before_taxes_fees", "extracted_before_taxes_fees", "overall_rating",
     "budget", "total_cost", "remaining", "within_budget",
 }
@@ -55,18 +56,21 @@ EVALUATION_SCHEMA = {
 }
 
 
-def evaluate_itinerary(client, conversation, answer, trace=None):
+def evaluate_itinerary(client, conversation, answer, trace=None, memory_context=None):
     # Send user requirements, rather than planner tool calls or internal feedback.
     requirements = [message["content"] for message in conversation
                     if isinstance(message, dict) and message.get("role") == "user"]
     review_data = {"user_requirements": requirements, "candidate": answer,
                    "tool_evidence": tool_evidence(trace)}
+    if memory_context is not None:
+        review_data["trip_memory"] = memory_context
     evaluation_input = json.dumps(review_data, ensure_ascii=False)
     if has_images(conversation):
         evaluation_input = [m for m in conversation if isinstance(m, dict) and m.get("role") == "user"]
         evaluation_input = evaluation_input + [{"role": "user", "content": (
             "Evaluate this proposed answer against the preceding requirements and reference images:\n"
-            + json.dumps({"candidate": answer, "tool_evidence": tool_evidence(trace)}, ensure_ascii=False))}]
+            + json.dumps({"candidate": answer, "tool_evidence": tool_evidence(trace),
+                          "trip_memory": memory_context}, ensure_ascii=False))}]
     response = client.responses.create(
         model="gpt-5.4-mini",
         instructions=EVALUATOR_INSTRUCTIONS,
@@ -75,9 +79,8 @@ def evaluate_itinerary(client, conversation, answer, trace=None):
                          "strict": True, "schema": EVALUATION_SCHEMA}},
     )
     if trace is not None:
-        usage = getattr(response, "usage", None)
         trace.append({"event": "model_call", "phase": "evaluator",
-                      "usage": usage.model_dump() if usage is not None else None})
+                      "usage": usage_dict(response)})
     evaluation = json.loads(response.output_text)
     if not evaluation.pop("is_itinerary"):
         return None
