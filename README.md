@@ -4,22 +4,9 @@ A conversational travel planner built in Python. Users can plan trips through a 
 
 ## Architecture
 
-```mermaid
-flowchart TD
-    U[User request<br/>web or CLI] --> I[Understand intent and constraints]
-    I --> M[Update trip state and conversation memory]
-    M --> P[Plan the trip]
-    P --> S[Search real flights, hotels, and places<br/>when needed]
-    S --> V[Validate costs against the budget<br/>when one is supplied]
-    V --> E[Evaluate itinerary quality<br/>when a full plan is produced]
-    V -->|Over budget: retry up to 2 times| P
-    E -->|Score below 7: retry up to 2 times| P
-    E --> F[Final answer]
-```
+<img src="docs/request-flow.svg" alt="Travelmate request flow: intent, memory, planner, real-time search, budget check, evaluator, and final answer, with retry paths" width="640">
 
-The diagram shows a full itinerary request. `intent.py` identifies the request and explicit changes to trip requirements; `memory.py` preserves trip state and summarizes older turns. If supplied requirements materially conflict, the agent asks for clarification before planning. `agent.py` runs the planner and any replans, `tools/` supplies search results and budget calculations, and `evaluator.py` scores itinerary quality. Narrow questions can skip searches, budget checks, or evaluation when they do not apply. After the retry limit, the agent explains an unresolved budget shortfall or returns the latest quality revision.
-
-Shared helpers live in `utils/`: `utils/currency.py` for currency defaults, `utils/multimodal.py` for image input, `utils/token_usage.py` for token accounting, plus budget, error, and tool-output helpers. The 50-case test runner and independent reviewer live in `tests/`; they assess the project and are not part of the user-facing request flow.
+The blue nodes are tool-using agents; the green nodes are tools (external searches and a deterministic budget check). The diagram shows a full itinerary request. `intent.py` makes one LLM classification call to identify the request and explicit changes to trip requirements. `memory.py` preserves trip state and summarizes older turns. If supplied requirements materially conflict, the classifier asks for clarification before planning. `agent.py` orchestrates the planner and any replans, while `tools/` supplies real search results and budget calculations. The separate evaluator agent in `evaluator.py` uses read-only tools to recheck budget arithmetic and inspect flight and hotel evidence before scoring itinerary quality. Its findings guide the planner's next revision. After the retry limit, the agent explains an unresolved budget shortfall or returns the latest quality revision.
 
 ## Setup and run
 
@@ -45,7 +32,7 @@ Start the web interface:
 .\venv\Scripts\python.exe web_app.py
 ```
 
-Open <http://127.0.0.1:8000>. The server listens on localhost only. The interface accepts text and up to three PNG, JPEG, WEBP, or GIF images (8 MB each) through the **+** button. It displays trip state, chat and itinerary, selected flight and hotel details, a cost breakdown, and Agent Activity. The activity panel shows observable searches and replanning events rather than private model reasoning. **New trip** clears that browser session's conversation and memory.
+Open <http://127.0.0.1:8000>. The server listens on localhost only.
 
 During planning, the chat and Agent Activity panel show the current task and completed tool actions as they happen, including searches, budget checks, evaluation, and replanning.
 
@@ -59,14 +46,12 @@ Start the CLI instead with:
 
 CLI commands: `/image` attaches an image, `/memory` displays trip memory, `/reset` clears conversation and memory, and `/exit` quits.
 
-## Planning, budgets, and memory
+## Planning, memory, and budgets
 
 - `trip_state` tracks origin, destination, traveler count, dates, hard constraints, soft preferences, selected flights and hotels, and user-locked selections. Explicit user updates replace earlier values.
-- When the traveler count is known, flight and hotel searches pass it as the adult count; flight fares returned for that group are used once in the budget rather than multiplied again. If child or infant fares are needed, adult pricing is only an approximation.
 - The five most recent user turns remain in short-term history; older dialogue is summarized. Web and CLI memory is in-process only and is lost when the application restarts.
-- A trip with a total budget uses `check_budget`. An over-budget plan triggers up to two budget replans. An itinerary with an evaluator average below 7 triggers up to two quality replans. `max_rounds=8` limits model/tool rounds **within one planning attempt**; it does not limit the number of user conversations.
-- When a budget has no explicit currency, the agent defaults to the departure location's currency when recognized (for example, TPE to TWD). Explicit currency takes precedence. The mapping in `utils/currency.py` covers selected departure locations, so unfamiliar origins still depend on intent classification. Flight and hotel searches use the resulting budget currency. `check_budget` only adds numbers: it does not convert currencies.
-- Hotel searches use check-in and check-out dates. For multi-night stays, the planner should use the full-stay price rather than treating a nightly rate as the total.
+- A trip with a total budget uses `check_budget`. An over-budget plan triggers up to two budget replans. An itinerary with an evaluator average below 7 triggers up to two quality replans. `max_rounds=8` limits model/tool rounds **within one planning attempt.**
+- When a budget has no explicit currency, the agent defaults to the departure location's currency when recognized (for example, USA to USD). Explicit currency takes precedence. The mapping in `utils/currency.py` covers selected departure locations, so unfamiliar origins still depend on intent classification. Flight and hotel searches use the resulting budget currency. `check_budget` only adds numbers: it does not convert currencies.
 - If dates are undecided, the agent can offer a flexible plan, but it must not invent date-specific flights, prices, or availability. Listed options are not reservations.
 
 ## Tests
