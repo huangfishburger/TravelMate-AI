@@ -6,19 +6,19 @@ from unittest.mock import Mock, patch
 import agent
 from intent import classify_intent
 from evaluator import evaluate_itinerary
-from multimodal import user_content, image_part
+from utils.multimodal import user_content, image_part
 
 
 class MultimodalTests(unittest.TestCase):
     def test_text_only_unchanged_and_local_image_encoded(self):
         self.assertEqual(user_content("Hello"), "Hello")
-        with patch("multimodal.Path.read_bytes", return_value=b"\x89PNG\r\n\x1a\nfixture"):
+        with patch("utils.multimodal.Path.read_bytes", return_value=b"\x89PNG\r\n\x1a\nfixture"):
             content = user_content("Where is this?", ["photo.png"])
         self.assertEqual(content[0]["text"], "Where is this?")
         self.assertTrue(content[1]["image_url"].startswith("data:image/png;base64,"))
 
     def test_invalid_image_rejected(self):
-        with patch("multimodal.Path.read_bytes", return_value=b"not an image"):
+        with patch("utils.multimodal.Path.read_bytes", return_value=b"not an image"):
             with self.assertRaises(ValueError):
                 image_part("bad.png")
 

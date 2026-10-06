@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 
 from web_app import Handler, activity_from_trace, flight_searches_from_trace, progress_from_trace
-from multimodal import image_part
+from utils.multimodal import image_part
 
 
 class WebAppTests(unittest.TestCase):

@@ -1,7 +1,7 @@
 import unittest
 from types import SimpleNamespace
 
-from token_usage import token_totals, usage_dict
+from utils.token_usage import token_totals, usage_dict
 
 
 class TokenUsageTests(unittest.TestCase):

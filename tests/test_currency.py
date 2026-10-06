@@ -4,7 +4,7 @@ from types import SimpleNamespace
 from unittest.mock import Mock
 from unittest.mock import patch
 
-from currency import default_currency
+from utils.currency import default_currency
 from intent import classify_intent
 from tools.hotels import search_hotels
 
