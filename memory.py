@@ -1,7 +1,7 @@
 """Structured trip facts and a bounded recent conversation window."""
 from copy import deepcopy
 import json
-from token_usage import usage_dict
+from utils.token_usage import usage_dict
 
 STATE_PATHS = {
     "origin", "destination", "travelers", "dates.start", "dates.end",
