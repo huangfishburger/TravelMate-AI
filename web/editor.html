@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edit itinerary · Travelmate</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIj4KICA8dGl0bGUgaWQ9InRpdGxlIj5UcmF2ZWxtYXRlIHJvdXRlIG1hcms8L3RpdGxlPgogIDxyZWN0IHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgcng9IjEyIiBmaWxsPSIjMTk3NjVmIi8+CiAgPHBhdGggZD0iTTEyIDM0QzE4IDM0IDE2IDE5IDI2IDE5aDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzQiIHI9IjMuNSIgZmlsbD0iI2ZmZiIvPgogIDxwYXRoIGQ9Im0yOSAxMyA3IDYtNyA2IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMy41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==">
+  <link rel="stylesheet" href="/editor.css">
+</head>
+<body>
+  <header class="editor-header">
+    <a href="/" class="back-link">← Back to chat</a>
+    <span class="editor-brand"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIj4KICA8dGl0bGUgaWQ9InRpdGxlIj5UcmF2ZWxtYXRlIHJvdXRlIG1hcms8L3RpdGxlPgogIDxyZWN0IHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgcng9IjEyIiBmaWxsPSIjMTk3NjVmIi8+CiAgPHBhdGggZD0iTTEyIDM0QzE4IDM0IDE2IDE5IDI2IDE5aDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzQiIHI9IjMuNSIgZmlsbD0iI2ZmZiIvPgogIDxwYXRoIGQ9Im0yOSAxMyA3IDYtNyA2IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMy41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==" alt="">Travelmate</span>
+    <button id="download" class="primary-button" type="button">Download .md</button>
+  </header>
+  <main class="editor-layout">
+    <section class="editor-panel" aria-label="Edit Markdown">
+      <div class="panel-heading">
+        <div><p class="eyebrow">YOUR COPY</p><h1>Edit itinerary</h1></div>
+        <span id="save-status" role="status">Saved in this browser tab</span>
+      </div>
+      <label for="draft-title">Document title</label>
+      <input id="draft-title" type="text" maxlength="120" autocomplete="off">
+      <label for="markdown">Markdown</label>
+      <textarea id="markdown" spellcheck="true" aria-describedby="editor-note"></textarea>
+      <p id="editor-note">Changes to this copy do not change the agent's plan or its budget check.</p>
+    </section>
+    <section class="preview-panel" aria-label="Itinerary preview">
+      <div class="panel-heading"><div><p class="eyebrow">PREVIEW</p><h2>Final itinerary</h2></div></div>
+      <article id="preview" class="preview-content"></article>
+    </section>
+  </main>
+  <script src="/editor.js" defer></script>
+</body>
+</html>
