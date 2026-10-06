@@ -6,16 +6,18 @@ from utils.budget import check_budget
 TOOLS = [{
     "type": "function",
     "name": "search_flights",
-    "description": "Search Google Flights for one-way or round-trip flight options and prices in USD.",
+    "description": "Search Google Flights for one-way or round-trip flight options in the requested currency. Origin and destination can each contain comma-separated airport codes, such as HND,NRT for Tokyo.",
     "strict": False,
     "parameters": {
         "type": "object",
         "properties": {
-            "origin": {"type": "string", "description": "Departure airport IATA code, e.g. TPE."},
-            "destination": {"type": "string", "description": "Arrival airport IATA code, e.g. SEA."},
+            "origin": {"type": "string", "description": "Departure airport code or comma-separated codes, e.g. TPE."},
+            "destination": {"type": "string", "description": "Arrival airport code or comma-separated codes, e.g. HND,NRT for Tokyo."},
             "departure_date": {"type": "string", "description": "Departure date in YYYY-MM-DD format."},
             "return_date": {"type": ["string", "null"], "description": "Return date in YYYY-MM-DD format, or null for one-way."},
-            "max_price": {"type": ["number", "null"], "description": "Maximum flight price in USD, or null for no limit."},
+            "max_price": {"type": ["number", "null"], "description": "Maximum flight price in the requested currency, or null for no limit."},
+            "currency": {"type": "string", "description": "Three-letter price currency, e.g. USD or TWD. Defaults to USD."},
+            "adults": {"type": "integer", "description": "Number of adult travelers whose tickets are being priced. Defaults to 1."},
             "nonstop": {"type": ["boolean", "null"], "description": "Whether to only show nonstop flights, or null for no preference."},
             "sorted_by": {"type": ["string", "null"],"enum": ["price", "duration", None], "description": "How to sort the results, or null for no sorting."},
         },
@@ -26,7 +28,7 @@ TOOLS = [{
 {
     "type": "function",
     "name": "search_hotels",
-    "description": "Search Google Hotels for hotel options and prices in USD.",
+    "description": "Search Google Hotels for the full check-in/check-out stay. Results include stay_nights and full_stay_price when the provider supplies a total_rate; max_price filters nightly prices.",
     "strict": False,
     "parameters": {
         "type": "object",
@@ -35,7 +37,8 @@ TOOLS = [{
             "check_in_date": {"type": "string", "description": "Check-in date in YYYY-MM-DD format."},
             "check_out_date": {"type": "string", "description": "Check-out date in YYYY-MM-DD format."},
             "adults": {"type": "integer", "description": "Number of adults staying in the hotel."},
-            "max_price": {"type": ["number", "null"], "description": "Maximum hotel price per night in USD, or null for no limit."},
+            "max_price": {"type": ["number", "null"], "description": "Maximum hotel price per night in the requested currency, or null for no limit."},
+            "currency": {"type": "string", "description": "Three-letter price currency, e.g. USD or TWD. Defaults to USD."},
         },
         "required": ["location", "check_in_date", "check_out_date", "adults"],
         "additionalProperties": False,
@@ -68,6 +71,7 @@ TOOLS.append({
         "type": "object",
         "properties": {
             "total_budget": {"type": "number", "description": "Total budget for the whole trip."},
+            "currency": {"type": "string", "description": "Three-letter currency shared by the budget and all costs."},
             "costs": {
                 "type": "object",
                 "description": "Total expenses by category, such as flights, accommodation, meals, transportation, activities, and miscellaneous.",

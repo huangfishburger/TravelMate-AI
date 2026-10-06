@@ -15,14 +15,22 @@ def search_flights(
     return_date=None, 
     max_price=None,
     nonstop=False,
-    sorted_by=None
+    sorted_by=None,
+    currency="USD",
+    adults=1,
 ):
+    currency = currency.upper()
+    if len(currency) != 3 or not currency.isalpha():
+        raise ValueError("currency must be a three-letter code")
+    if isinstance(adults, bool) or not isinstance(adults, int) or adults < 1:
+        raise ValueError("adults must be a positive integer")
     params = {
         "engine": "google_flights",
         "departure_id": origin,
         "arrival_id": destination,
         "outbound_date": departure_date,
-        "currency": "USD",
+        "currency": currency,
+        "adults": adults,
         "hl": "en"
     }
 
@@ -45,6 +53,8 @@ def search_flights(
 
     results = client.search(params)
     processed = process_flight_results(results)
+    processed["currency"] = currency
+    processed["adults"] = adults
     if not return_date or "error" in processed:
         return processed
 

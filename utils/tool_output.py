@@ -1,13 +1,13 @@
 """Trim search-provider metadata before sending results back to the model."""
 
 SEARCH_FIELDS = {
-    "error", "flights", "price", "type", "total_duration", "layovers",
+    "error", "flights", "price", "type", "total_duration", "layovers", "adults",
     "round_trip_options", "outbound", "return_options", "return_search_status",
     "return_search_error", "independent_return_options",
     "duration", "airline", "flight_number", "departure_airport",
     "arrival_airport", "time", "name", "id", "travel_class", "stops",
     "price_insights", "lowest_price", "price_level", "typical_price_range",
-    "properties", "rate_per_night", "total_rate", "lowest",
+    "properties", "rate_per_night", "total_rate", "stay_nights", "full_stay_price", "lowest",
     "extracted_lowest", "before_taxes_fees", "extracted_before_taxes_fees",
     "hotel_class", "extracted_hotel_class", "overall_rating", "rating",
     "reviews", "address", "description", "amenities", "gps_coordinates",
