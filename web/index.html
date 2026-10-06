@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Travelmate · Travel planner</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIj4KICA8dGl0bGUgaWQ9InRpdGxlIj5UcmF2ZWxtYXRlIHJvdXRlIG1hcms8L3RpdGxlPgogIDxyZWN0IHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgcng9IjEyIiBmaWxsPSIjMTk3NjVmIi8+CiAgPHBhdGggZD0iTTEyIDM0QzE4IDM0IDE2IDE5IDI2IDE5aDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzQiIHI9IjMuNSIgZmlsbD0iI2ZmZiIvPgogIDxwYXRoIGQ9Im0yOSAxMyA3IDYtNyA2IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMy41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==">
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><img class="brand-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIj4KICA8dGl0bGUgaWQ9InRpdGxlIj5UcmF2ZWxtYXRlIHJvdXRlIG1hcms8L3RpdGxlPgogIDxyZWN0IHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgcng9IjEyIiBmaWxsPSIjMTk3NjVmIi8+CiAgPHBhdGggZD0iTTEyIDM0QzE4IDM0IDE2IDE5IDI2IDE5aDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzQiIHI9IjMuNSIgZmlsbD0iI2ZmZiIvPgogIDxwYXRoIGQ9Im0yOSAxMyA3IDYtNyA2IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMy41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==" alt=""><span>Travelmate</span><small>TRAVEL STUDIO</small></div>
+      <div class="top-actions"><span class="status-dot"></span><span>Planning workspace</span><button id="reset" class="text-button">New trip</button></div>
+    </header>
+
+    <main class="layout">
+      <aside class="left-rail">
+        <div class="eyebrow">YOUR JOURNEY</div>
+        <section class="state-card" aria-label="Trip state">
+          <div class="card-title"><span>Trip state</span><span class="card-symbol">↗</span></div>
+          <h1 id="destination">Where to next?</h1>
+          <p id="dates-budget" class="state-subtitle">Your plans will appear here.</p>
+          <div class="divider"></div>
+          <div class="state-group"><div class="state-label">NON-NEGOTIABLE</div><div id="hard-tags" class="tag-list"><span class="empty-tag">No constraints yet</span></div></div>
+          <div class="state-group"><div class="state-label">THE LITTLE THINGS</div><div id="soft-tags" class="tag-list"><span class="empty-tag">Preferences will appear here</span></div></div>
+        </section>
+        <div class="rail-note"><span>✦</span><p>Your preferences stay in view as your itinerary evolves.</p></div>
+      </aside>
+
+      <section class="conversation" aria-label="Chat and itinerary">
+        <div id="messages" class="messages" aria-live="polite">
+          <div class="welcome"><div class="welcome-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIj4KICA8dGl0bGUgaWQ9InRpdGxlIj5UcmF2ZWxtYXRlIHJvdXRlIG1hcms8L3RpdGxlPgogIDxyZWN0IHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgcng9IjEyIiBmaWxsPSIjMTk3NjVmIi8+CiAgPHBhdGggZD0iTTEyIDM0QzE4IDM0IDE2IDE5IDI2IDE5aDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzQiIHI9IjMuNSIgZmlsbD0iI2ZmZiIvPgogIDxwYXRoIGQ9Im0yOSAxMyA3IDYtNyA2IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMy41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==" alt=""></div><h3>Every great trip starts somewhere.</h3><p>Tell me where you're going, your dates, your budget, or the kind of experience you want.</p><div class="prompt-chips"><button data-prompt="Plan a relaxed 3-day trip to Seattle with coffee and food stops.">A relaxed Seattle escape ↗</button><button data-prompt="Help me plan a weekend trip within a $1,000 budget.">Plan around my budget ↗</button></div></div>
+        </div>
+        <div id="attachments" class="attachments" aria-live="polite"></div>
+        <form id="composer" class="composer"><label for="images" class="attach-button" title="Attach images" aria-label="Attach images">＋</label><input id="images" type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden><label for="prompt" class="sr-only">Message</label><textarea id="prompt" rows="1" placeholder="Ask a question or attach an image"></textarea><button type="submit" id="send" aria-label="Send message">↑</button></form>
+        <div class="composer-hint">Your itinerary can change anytime. Just tell us what to adjust.</div>
+      </section>
+
+      <aside class="activity-rail" aria-label="Agent activity"><div class="eyebrow">BEHIND THE SCENES</div><div class="activity-header"><h2>Agent activity</h2><button id="activity-toggle" class="activity-toggle" aria-expanded="true" aria-controls="activity" aria-label="Toggle agent activity">−</button></div><p class="activity-intro">A clear view of the steps taken to shape your trip.</p><div id="activity" class="activity-list"><div class="activity-empty">Searches and planning updates will show here.</div></div></aside>
+    </main>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
