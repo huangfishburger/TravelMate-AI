@@ -77,6 +77,11 @@ def activity_from_trace(trace):
             activity.append({"status": "progress", "label": "Replanned to reduce cost"})
         elif kind == "quality_replan":
             activity.append({"status": "progress", "label": "Revised itinerary after quality review"})
+        elif kind == "evaluator_tool_call":
+            label = {"audit_budget": "Evaluator checked budget math",
+                     "inspect_booking_evidence": "Evaluator inspected flight and hotel evidence"}.get(event.get("name"))
+            if label:
+                activity.append({"status": "done", "label": label})
         elif kind == "clarification":
             activity.append({"status": "warning", "label": "Asked for clarification"})
     return activity
@@ -98,6 +103,10 @@ def progress_from_trace(trace):
         kind = event.get("event")
         if kind == "tool_start":
             return tool_labels.get(event.get("name"), "Checking trip details")
+        if kind == "evaluator_tool_start":
+            return {"audit_budget": "Evaluator checking budget math",
+                    "inspect_booking_evidence": "Evaluator checking booking evidence"}.get(
+                        event.get("name"), "Evaluator verifying itinerary")
         if kind in labels:
             return labels[kind]
     return "Starting your trip plan"
