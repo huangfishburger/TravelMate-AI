@@ -10,11 +10,12 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tests.case_checks import check_rules, result_status
+from token_usage import token_totals
 
 
 def fingerprint(case, config):
     source = "".join((ROOT / p).read_text(encoding="utf-8") for p in
-                     ["agent.py", "evaluator.py", "intent.py", "multimodal.py", "instructions.py", "utils/tool_output.py", "tests/case_checks.py", "tests/reviewer.py", "tests/run_cases.py"])
+                     ["agent.py", "evaluator.py", "intent.py", "memory.py", "currency.py", "token_usage.py", "multimodal.py", "instructions.py", "utils/tool_output.py", "tests/case_checks.py", "tests/reviewer.py", "tests/run_cases.py"])
     return hashlib.sha256((json.dumps({"case": case, "config": config}, sort_keys=True)
                            + source).encode()).hexdigest()
 
@@ -55,6 +56,8 @@ def run_case(case, config, runner, reviewer=None):
         except Exception as exc:
             result["semantic_review"] = {"status": "error", "error": {"type": type(exc).__name__, "message": str(exc)}}
             result["status"] = "fail" if result["status"] == "fail" else "needs_review"
+    reviewer_usage = result.get("semantic_review", {}).get("usage")
+    result["token_usage"] = token_totals(trace, reviewer_usage=reviewer_usage)
     result["elapsed_seconds"] = round(time.perf_counter() - started, 3)
     return result
 
@@ -104,6 +107,17 @@ def main():
     summary = {"total": len(results), "statuses": dict(Counter(r["status"] for r in results)),
                "quality_target_met": sum(r["quality_target_met"] is True for r in results),
                "quality_evaluated": sum(r["quality_target_met"] is not None for r in results)}
+    summary["token_usage"] = token_totals([])
+    for result in results:
+        usage = result.get("token_usage") or token_totals(
+            result.get("trace", []), result.get("semantic_review", {}).get("usage"))
+        for key in ("input_tokens", "output_tokens", "total_tokens", "calls", "missing_usage_calls"):
+            summary["token_usage"][key] += usage[key]
+        for phase, counts in usage["by_phase"].items():
+            bucket = summary["token_usage"]["by_phase"].setdefault(
+                phase, {key: 0 for key in counts})
+            for key, value in counts.items():
+                bucket[key] += value
     args.output.with_suffix(".summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     print(json.dumps(summary))
 

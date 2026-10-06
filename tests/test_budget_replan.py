@@ -40,6 +40,42 @@ class BudgetReplanTests(unittest.TestCase):
                          {"type": "function", "name": "check_budget"})
         self.assertTrue(any(e["event"] == "budget_check_missing" for e in trace))
 
+    def test_budget_currency_is_forced_into_search_and_check_tools(self):
+        search = tool_response("search_flights", {"origin": "TPE", "destination": "HND",
+                                                  "departure_date": "2026-11-06", "return_date": None,
+                                                  "currency": "USD"})
+        check = tool_response("check_budget", {"total_budget": 100, "costs": {"flight": 80},
+                                               "currency": "USD"})
+        final = SimpleNamespace(output=[], output_text=json.dumps({"response": "Plan"}))
+        with patch.object(agent, "classify_intent", return_value={"intent": "itinerary",
+             "total_budget": 100, "currency": "TWD"}), \
+             patch.object(agent.client.responses, "create", side_effect=[search, check, final]), \
+             patch.object(agent, "execute_tool", side_effect=lambda name, args:
+                 check_budget(**args) if name == "check_budget" else {"flights": [], "currency": args["currency"]}) as execute:
+            answer = agent.run_agent("Plan from TPE", max_rounds=3)
+        self.assertEqual(execute.call_args_list[0].args[1]["currency"], "TWD")
+        self.assertEqual(execute.call_args_list[1].args[1]["currency"], "TWD")
+        self.assertEqual(answer["currency"], "TWD")
+
+    def test_two_travelers_are_used_for_flight_and_hotel_search(self):
+        flight = tool_response("search_flights", {"origin": "TPE", "destination": "HND",
+                                                  "departure_date": "2026-11-06", "return_date": None})
+        hotel = tool_response("search_hotels", {"location": "Tokyo", "check_in_date": "2026-11-06",
+                                                "check_out_date": "2026-11-08", "adults": 1})
+        check = tool_response("check_budget", {"total_budget": 1000,
+                                               "costs": {"flight": 400, "hotel": 200}})
+        final = SimpleNamespace(output=[], output_text=json.dumps({"response": "Plan for two"}))
+        def execute(name, args):
+            return check_budget(**args) if name == "check_budget" else {"flights": [], "currency": "USD"}
+        with patch.object(agent, "classify_intent", return_value={"intent": "itinerary",
+             "total_budget": 1000, "currency": "USD", "travelers": 2}), \
+             patch.object(agent.client.responses, "create", side_effect=[flight, hotel, check, final]), \
+             patch.object(agent, "execute_tool", side_effect=execute) as called:
+            answer = agent.run_agent("Plan for two", max_rounds=4)
+        self.assertEqual(called.call_args_list[0].args[1]["adults"], 2)
+        self.assertEqual(called.call_args_list[1].args[1]["adults"], 2)
+        self.assertEqual(answer["costs"]["flight"], 400)
+
     def test_clarification_can_return_without_budget_check(self):
         response = SimpleNamespace(output=[], output_text=json.dumps({
             "response_type": "clarification", "response": "Which dates?"}))

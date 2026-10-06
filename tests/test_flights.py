@@ -48,6 +48,25 @@ class FlightTests(unittest.TestCase):
         self.assertEqual(search.call_count, 1)
         self.assertNotIn("round_trip_options", result)
 
+    def test_requested_currency_applies_to_flight_search_and_price_cap(self):
+        with patch("tools.flights.client.search", return_value={"best_flights": [OUTBOUND]}) as search:
+            result = search_flights("TPE", "HND", "2026-11-06", max_price=10000, currency="TWD")
+        self.assertEqual(search.call_args.args[0]["currency"], "TWD")
+        self.assertEqual(search.call_args.args[0]["max_price"], 10000)
+        self.assertEqual(result["currency"], "TWD")
+
+    def test_multiple_tokyo_airports_use_one_search(self):
+        with patch("tools.flights.client.search", return_value={"best_flights": [OUTBOUND]}) as search:
+            search_flights("TPE", "HND,NRT", "2026-11-06", currency="TWD")
+        self.assertEqual(search.call_count, 1)
+        self.assertEqual(search.call_args.args[0]["arrival_id"], "HND,NRT")
+
+    def test_passenger_count_reaches_provider_and_result(self):
+        with patch("tools.flights.client.search", return_value={"best_flights": [OUTBOUND]}) as search:
+            result = search_flights("TPE", "HND", "2026-11-06", adults=2, currency="TWD")
+        self.assertEqual(search.call_args.args[0]["adults"], 2)
+        self.assertEqual(result["adults"], 2)
+
 
 if __name__ == "__main__":
     unittest.main()
